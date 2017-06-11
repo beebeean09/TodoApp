@@ -18933,6 +18933,8 @@ var _root2 = _interopRequireDefault(_root);
 
 var _todo_actions = __webpack_require__(358);
 
+var _step_actions = __webpack_require__(363);
+
 var _selectors = __webpack_require__(362);
 
 var _selectors2 = _interopRequireDefault(_selectors);
@@ -18943,6 +18945,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var root = document.getElementById('root');
     var store = (0, _store2.default)();
     window.store = store;
+    window.receiveStep = _step_actions.receiveStep;
     _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
 
@@ -19170,12 +19173,17 @@ var _todos_reducer = __webpack_require__(359);
 
 var _todos_reducer2 = _interopRequireDefault(_todos_reducer);
 
+var _steps_reducer = __webpack_require__(364);
+
+var _steps_reducer2 = _interopRequireDefault(_steps_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RootReducer = (0, _redux.combineReducers)({
   errors: _errors_reducer2.default,
   gif: _gif_reducer2.default,
-  todos: _todos_reducer2.default
+  todos: _todos_reducer2.default,
+  steps: _steps_reducer2.default
 });
 
 exports.default = RootReducer;
@@ -36859,6 +36867,100 @@ var allTodos = function allTodos(_ref) {
 };
 
 exports.default = allTodos;
+
+/***/ }),
+/* 363 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var RECEIVE_STEPS = exports.RECEIVE_STEPS = "RECEIVE_STEPS";
+var RECEIVE_STEP = exports.RECEIVE_STEP = "RECEIVE_STEP";
+var REMOVE_STEP = exports.REMOVE_STEP = "REMOVE_STEP";
+
+var receiveSteps = exports.receiveSteps = function receiveSteps(steps) {
+  return {
+    type: RECEIVE_STEPS,
+    steps: steps
+  };
+};
+
+var receiveStep = exports.receiveStep = function receiveStep(step) {
+  return {
+    type: RECEIVE_STEP,
+    step: step
+  };
+};
+
+var removeStep = exports.removeStep = function removeStep(step) {
+  return {
+    type: REMOVE_STEP,
+    step: step
+  };
+};
+
+/***/ }),
+/* 364 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _step_actions = __webpack_require__(363);
+
+var _merge = __webpack_require__(101);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = {
+  1: {
+    title: "walk to store",
+    done: false,
+    todo_id: 1
+  },
+  2: {
+    title: "buy soap",
+    done: false,
+    todo_id: 1
+  }
+};
+
+var StepsReducer = function StepsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  Object.assign(state);
+  var nextState = void 0;
+
+  switch (action.type) {
+    case _step_actions.RECEIVE_STEPS:
+      nextState = (0, _merge2.default)({}, state);
+      action.steps.forEach(function (step) {
+        return nextState[step.id];
+      });
+      return nextState;
+    case _step_actions.RECEIVE_STEP:
+      return (0, _merge2.default)({}, state, action.step);
+    case _step_actions.REMOVE_STEP:
+      nextState = (0, _merge2.default)({}, state);
+      delete nextState[action.step.id];
+      return nextState;
+    default:
+      return state;
+  }
+};
+
+exports.default = StepsReducer;
 
 /***/ })
 /******/ ]);
