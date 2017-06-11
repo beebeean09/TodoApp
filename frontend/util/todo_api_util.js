@@ -19,7 +19,7 @@ export const createTodo = () => {
   });
 };
 
-export const deleteTodo = () => {
+export const deleteTodo = (todo) => {
   return $.ajax({
     method: 'DELETE'
   });
