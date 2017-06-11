@@ -11,5 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let store = configureStore();
     window.store = store;
     window.receiveStep = receiveStep;
+    window.allTodos  = allTodos;
     ReactDOM.render(<Root store={ store } />, root);
 });
