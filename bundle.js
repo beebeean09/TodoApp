@@ -18931,6 +18931,12 @@ var _root = __webpack_require__(137);
 
 var _root2 = _interopRequireDefault(_root);
 
+var _todo_actions = __webpack_require__(358);
+
+var _selectors = __webpack_require__(362);
+
+var _selectors2 = _interopRequireDefault(_selectors);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -36653,7 +36659,7 @@ exports.default = valueEqual;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateTodo = exports.deleteTodo = exports.createTodo = exports.fetchTodos = exports.fetchTodo = exports.removeTodo = exports.receiveTodos = exports.receiveTodo = undefined;
+exports.updateTodo = exports.deleteTodo = exports.createTodo = exports.fetchTodos = exports.fetchTodo = exports.receiveErrors = exports.removeTodo = exports.receiveTodos = exports.receiveTodo = exports.RECEIVE_ERRORS = exports.REMOVE_TODO = exports.RECEIVE_TODOS = exports.RECEIVE_TODO = undefined;
 
 var _todo_api_util = __webpack_require__(360);
 
@@ -36661,9 +36667,10 @@ var TodoAPIUtil = _interopRequireWildcard(_todo_api_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var RECEIVE_TODO = 'RECEIVE_TODO';
-var RECEIVE_TODOS = 'RECEIVE_TODOS';
-var REMOVE_TODO = 'REMOVE_TODO';
+var RECEIVE_TODO = exports.RECEIVE_TODO = 'RECEIVE_TODO';
+var RECEIVE_TODOS = exports.RECEIVE_TODOS = 'RECEIVE_TODOS';
+var REMOVE_TODO = exports.REMOVE_TODO = 'REMOVE_TODO';
+var RECEIVE_ERRORS = exports.RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 
 var receiveTodo = exports.receiveTodo = function receiveTodo(todo) {
   return {
@@ -36683,6 +36690,13 @@ var removeTodo = exports.removeTodo = function removeTodo(todo) {
   return {
     type: REMOVE_TODO,
     todo: todo
+  };
+};
+
+var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
+  return {
+    type: RECEIVE_ERRORS,
+    errors: errors
   };
 };
 
@@ -36745,8 +36759,23 @@ var _merge2 = _interopRequireDefault(_merge);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var initialState = {
+  1: {
+    id: 1,
+    title: "wash car",
+    body: "with soap",
+    done: false
+  },
+  2: {
+    id: 2,
+    title: "wash dog",
+    body: "with shampoo",
+    done: true
+  }
+};
+
 var TodosReducer = function TodosReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
   Object.freeze(state);
@@ -36810,6 +36839,26 @@ var updateTodo = exports.updateTodo = function updateTodo() {
 
   });
 };
+
+/***/ }),
+/* 361 */,
+/* 362 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var allTodos = function allTodos(_ref) {
+  var todos = _ref.todos;
+  return Object.keys(todos).map(function (id) {
+    return todos[id];
+  });
+};
+
+exports.default = allTodos;
 
 /***/ })
 /******/ ]);
