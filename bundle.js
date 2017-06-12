@@ -36989,6 +36989,14 @@ var _todo_list_display = __webpack_require__(367);
 
 var _todo_list_display2 = _interopRequireDefault(_todo_list_display);
 
+var _todo_form = __webpack_require__(368);
+
+var _todo_form2 = _interopRequireDefault(_todo_form);
+
+var _todo_list_item = __webpack_require__(369);
+
+var _todo_list_item2 = _interopRequireDefault(_todo_list_item);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37009,13 +37017,15 @@ var TodoList = function (_React$Component) {
   _createClass(TodoList, [{
     key: 'render',
     value: function render() {
-      var todos = this.props.todos.map(function (todo, idx) {
-        return _react2.default.createElement(
-          'ul',
-          { key: idx },
-          todo.title,
-          todo.body
-        );
+      var _props = this.props,
+          todos = _props.todos,
+          receiveTodo = _props.receiveTodo;
+
+      var todoItems = todos.map(function (todo) {
+        return _react2.default.createElement(_todo_list_item2.default, {
+          key: 'todo-list-item' + todo.id,
+          todo: todo,
+          receiveTodo: receiveTodo });
       });
 
       return _react2.default.createElement(
@@ -37024,15 +37034,15 @@ var TodoList = function (_React$Component) {
         'Hello this is the TODOLIST COMPONENT!',
         _react2.default.createElement(
           'div',
-          null,
+          { className: 'todo-list' },
           _react2.default.createElement(
             'h1',
             null,
             'Todo List'
           ),
-          todos
+          todoItems
         ),
-        _react2.default.createElement(_todo_list_display2.default, null)
+        _react2.default.createElement(_todo_form2.default, { receiveTodo: receiveTodo })
       );
     }
   }]);
@@ -37137,6 +37147,20 @@ var TodoListDisplay = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = TodoListDisplay;
+
+/***/ }),
+/* 368 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/***/ }),
+/* 369 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /***/ })
 /******/ ]);
