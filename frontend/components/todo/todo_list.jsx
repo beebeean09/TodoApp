@@ -1,4 +1,5 @@
 import React from 'react';
+import TodoListDisplay from './todo_list_display';
 
 class TodoList extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class TodoList extends React.Component {
           <h1>Todo List</h1>
           {todos}
         </div>
+        <TodoListDisplay/>
       </div>
     );
   }
