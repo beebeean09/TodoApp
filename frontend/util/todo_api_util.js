@@ -25,7 +25,7 @@ export const deleteTodo = (todo) => {
   });
 };
 
-export const updateTodo = () => {
+export const updateTodo = (todo) => {
   return $.ajax({
     method: 'EDIT',
 

@@ -36847,7 +36847,7 @@ var deleteTodo = exports.deleteTodo = function deleteTodo(todo) {
   });
 };
 
-var updateTodo = exports.updateTodo = function updateTodo() {
+var updateTodo = exports.updateTodo = function updateTodo(todo) {
   return $.ajax({
     method: 'EDIT'
 
@@ -37019,15 +37019,16 @@ var TodoList = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           todos = _props.todos,
-          receiveTodo = _props.receiveTodo;
+          updateTodo = _props.updateTodo;
 
       var todoItems = todos.map(function (todo) {
         return _react2.default.createElement(_todo_list_item2.default, {
           key: 'todo-list-item' + todo.id,
           todo: todo,
-          receiveTodo: receiveTodo });
+          updateTodo: updateTodo });
       });
 
+      // <TodoForm receiveTodo={receiveTodo}/>
       return _react2.default.createElement(
         'div',
         null,
@@ -37041,8 +37042,7 @@ var TodoList = function (_React$Component) {
             'Todo List'
           ),
           todoItems
-        ),
-        _react2.default.createElement(_todo_form2.default, { receiveTodo: receiveTodo })
+        )
       );
     }
   }]);
@@ -37087,11 +37087,14 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    receiveTodo: function receiveTodo(todo) {
-      return dispatch((0, _todo_actions.receiveTodo)(todo));
+    fetchTodos: function fetchTodos() {
+      return dispatch((0, _todo_actions.fetchTodos)());
     },
-    receiveTodos: function receiveTodos() {
-      return dispatch((0, _todo_actions.receiveTodos)());
+    createTodo: function createTodo(todo) {
+      return dispatch((0, _todo_actions.createTodo)(todo));
+    },
+    updateTodo: function updateTodo(todo) {
+      return dispatch((0, _todo_actions.updateTodo)(todo));
     }
   };
 };
@@ -37172,6 +37175,14 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _merge = __webpack_require__(101);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _todo_list_display = __webpack_require__(367);
+
+var _todo_list_display2 = _interopRequireDefault(_todo_list_display);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37180,26 +37191,77 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var TodoListItem = function (_React$Compnent) {
-  _inherits(TodoListItem, _React$Compnent);
+var TodoListItem = function (_React$Component) {
+  _inherits(TodoListItem, _React$Component);
 
   function TodoListItem(props) {
     _classCallCheck(this, TodoListItem);
 
-    return _possibleConstructorReturn(this, (TodoListItem.__proto__ || Object.getPrototypeOf(TodoListItem)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (TodoListItem.__proto__ || Object.getPrototypeOf(TodoListItem)).call(this, props));
+
+    _this.state = { detail: false };
+    _this.toggleDetail = _this.toggleDetail.bind(_this);
+    _this.toggleTodo = _this.toggleTodo.bind(_this);
+    return _this;
   }
 
   _createClass(TodoListItem, [{
+    key: 'toggleDetail',
+    value: function toggleDetail(e) {
+      e.preventDefault();
+      this.setState({ detail: !this.state.detail });
+    }
+  }, {
+    key: 'toggleTodo',
+    value: function toggleTodo(e) {
+      e.preventDefault();
+      var toggledTodo = (0, _merge2.default)({}, this.props.todo, {
+        done: !this.props.todo.done
+      });
+      this.props.updateTodo(toggledTodo);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var todo = this.props.todo;
+      var title = todo.title,
+          done = todo.done;
 
-      return _react2.default.createElement('div', null);
+      var detail = void 0;
+      if (this.state.detail) {
+        detail = _react2.default.createElement(_todo_list_display2.default, { todo: todo });
+      }
+
+      return _react2.default.createElement(
+        'ul',
+        null,
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'h3',
+            null,
+            _react2.default.createElement(
+              'a',
+              { onClick: this.toggleDetail },
+              title
+            )
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              className: done ? "done" : "undone",
+              onClick: this.toggleTodo },
+            done ? "Undo" : "Done"
+          )
+        ),
+        detail
+      );
     }
   }]);
 
   return TodoListItem;
-}(_react2.default.Compnent);
+}(_react2.default.Component);
 
 exports.default = TodoListItem;
 
