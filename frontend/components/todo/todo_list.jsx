@@ -9,8 +9,12 @@ class TodoList extends React.Component {
 
   }
 
+  componentDidMount() {
+    this.props.fetchTodos();
+  }
+
   render() {
-    const { todos, updateTodo } = this.props;
+    const { todos, updateTodo, createTodo } = this.props;
     const todoItems = todos.map(todo => (
         <TodoListItem
           key={`todo-list-item${todo.id}`}
@@ -19,7 +23,6 @@ class TodoList extends React.Component {
       )
     );
 
-    // <TodoForm receiveTodo={receiveTodo}/>
     return (
       <div>
         Hello this is the TODOLIST COMPONENT!
@@ -27,6 +30,7 @@ class TodoList extends React.Component {
           <h1>Todo List</h1>
           {todoItems}
         </div>
+        <TodoForm createTodo={createTodo}/>
       </div>
     );
   }
