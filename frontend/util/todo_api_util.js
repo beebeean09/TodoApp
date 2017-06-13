@@ -1,33 +1,37 @@
+import $ from '@rtorr/ajax-only';
+
 export const fetchTodo = (id) => {
   return $.ajax({
     method: 'GET',
-    // url:
+    url: `api/todos/${id}`
   });
 };
 export const fetchTodos = () => {
   return $.ajax({
     method: 'GET',
-    // url:
+    url: 'api/todos'
   });
 };
 
-export const createTodo = () => {
+export const createTodo = (todo) => {
   return $.ajax({
     method: 'POST',
-    // url:
-    // data: { todo }
+    url: 'api/todos',
+    data: { todo }
   });
 };
 
 export const deleteTodo = (todo) => {
   return $.ajax({
-    method: 'DELETE'
+    method: 'DELETE',
+    url: `api/todos/${todo.id}`
   });
 };
 
 export const updateTodo = (todo) => {
   return $.ajax({
-    method: 'EDIT',
-
+    method: 'PATCH',
+    url: `api/todos/${todo.id}`,
+    data: { todo }
   });
 };
