@@ -1,0 +1,28 @@
+.todo-list-container {
+  padding: 5px;
+  border: 3px solid black;
+  font-family: sans-serif;
+
+  .todo-list {
+    border: 3px solid grey;
+
+    .todo-list-item {
+      border: 3px solid pink;
+
+      .done {
+        border: 1px solid grey;
+        border-radius: 4px;
+        padding: 5px 10px;
+        background: grey;
+        cursor: pointer;
+      }
+      .undone {
+        border: 1px solid lightblue;
+        border-radius: 4px;
+        padding: 5px 10px;
+        background: lightblue;
+        cursor: pointer;
+      }
+    }
+  }
+}

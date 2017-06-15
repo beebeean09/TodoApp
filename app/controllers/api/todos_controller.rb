@@ -17,7 +17,8 @@ class Api::TodosController < ApplicationController
   end
 
   def update
-    @todo = Todo.find(params[:id])
+    @todo = Todo.find_by_id(params[:id])
+    # byebug
     if @todo.update(todo_params)
       render json: @todo
     else
@@ -33,6 +34,6 @@ class Api::TodosController < ApplicationController
 
   private
   def todo_params
-    params.require(:todo).permit(:title, :body, :done)
+    params.require(:todo).permit(:id, :title, :body, :done)
   end
 end

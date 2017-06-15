@@ -19,12 +19,12 @@ const initialState = {
   },
 };
 
-const TodosReducer = (state = initialState, action) => {
+const TodosReducer = (state = {}, action) => {
   Object.freeze(state);
   let nextState;
   switch(action.type) {
     case RECEIVE_TODO:
-      return merge({}, state, action.todo);
+      return merge({}, state, {[action.todo.id]: action.todo});
     case RECEIVE_TODOS:
       return merge({}, state, action.todos);
     case REMOVE_TODO:

@@ -24,7 +24,7 @@ class TodoList extends React.Component {
     );
 
     return (
-      <div>
+      <div className="todo-list-container">
         Hello this is the TODOLIST COMPONENT!
         <div className="todo-list">
           <h1>Todo List</h1>

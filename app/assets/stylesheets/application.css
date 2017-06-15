@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+/*Components*/
+ /*@import "components/*";*/
+
+/*CSS Reset*/
+ @import "base/reset.scss";
+
+ /*FONT*/
+ @import "base/font.scss";
+
+ /*body {
+   background: #CCF2F2;
+ }*/

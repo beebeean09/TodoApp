@@ -20,6 +20,7 @@ class TodoListItem extends React.Component {
     const toggledTodo = merge({}, this.props.todo, {
       done: !this.props.todo.done
     });
+    debugger;
     this.props.updateTodo(toggledTodo);
   }
 
@@ -33,7 +34,7 @@ class TodoListItem extends React.Component {
 
     return(
       <ul>
-        <div>
+        <div className="todo-list-item">
           <h3><a onClick={this.toggleDetail}>{title}</a></h3>
           <button
             className={done ? "done" : "undone"}
