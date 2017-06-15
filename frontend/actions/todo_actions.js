@@ -46,5 +46,5 @@ export const deleteTodo = (todo) => dispatch => {
 
 export const updateTodo = (todo) => dispatch => {
   return TodoAPIUtil.updateTodo(todo)
-          .then((todo) => dispatch(receiveTodo(todo)));
+          .then((todo1) => dispatch(receiveTodo(todo1)));
 };
