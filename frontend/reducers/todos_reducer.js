@@ -24,9 +24,13 @@ const TodosReducer = (state = {}, action) => {
   let nextState;
   switch(action.type) {
     case RECEIVE_TODO:
-      return merge({}, state, {[action.todo.id]: action.todo});
+      debugger;
+      const newTodo = {[action.todo.id]: action.todo};
+      return Object.assign({}, state, newTodo);
     case RECEIVE_TODOS:
-      return merge({}, state, action.todos);
+      nextState = {};
+      action.todos.forEach(todo => {nextState[todo.id] = todo;});
+      return nextState;
     case REMOVE_TODO:
       nextState = merge({}, state);
       delete nextState[action.todo.id];

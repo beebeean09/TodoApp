@@ -34,9 +34,9 @@ export const fetchTodos = () => dispatch => {
           .then((todos) => dispatch(receiveTodos(todos)));
 };
 
-export const createTodo = () => dispatch => {
-  return TodoAPIUtil.createTodo()
-          .then((todo) => dispatch(receiveTodo(todo)));
+export const createTodo = (todo) => dispatch => {
+  return TodoAPIUtil.createTodo(todo)
+          .then((todo1) => dispatch(receiveTodo(todo1)));
 };
 
 export const deleteTodo = (todo) => dispatch => {

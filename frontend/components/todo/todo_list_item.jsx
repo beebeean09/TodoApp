@@ -25,8 +25,13 @@ class TodoListItem extends React.Component {
   }
 
   render() {
-    const { todo } = this.props;
-    const { title, done } = todo;
+    debugger;
+    const todo = this.props.todo;
+    const done = this.props.todo.done;
+    const title = this.props.todo.title;
+    console.log(todo);
+    console.log(done);
+    console.log(title);
     let detail;
     if (this.state.detail) {
       detail = <TodoListDisplay todo={todo} />;
