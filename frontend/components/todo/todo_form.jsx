@@ -5,16 +5,19 @@ class TodoForm extends React.Component {
     super(props);
 
     this.state = {
-      title: "",
-      body: "",
-      done: false
+      todo: {
+        title: "",
+        body: "",
+        done: false
+      }
     };
 
-    this.handleSumbit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    // debugger;
     const todo = Object.assign({}, this.state);
     this.props.createTodo(todo);
     this.setState({
@@ -28,6 +31,7 @@ class TodoForm extends React.Component {
   }
 
   render() {
+    debugger;
     const { createTodo } = this.props;
 
     return(

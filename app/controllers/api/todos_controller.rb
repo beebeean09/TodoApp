@@ -12,7 +12,7 @@ class Api::TodosController < ApplicationController
     if @todo.save
       render json: @todo
     else
-      render json: @todo.error.full_messages
+      render json: @todo.errors.full_messages
     end
   end
 
