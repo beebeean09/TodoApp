@@ -1,4 +1,6 @@
 class Api::TodosController < ApplicationController
+  before_action :redirect_if_logged_in
+
   def show
     render json: Todo.find_by_id(params[:id])
   end

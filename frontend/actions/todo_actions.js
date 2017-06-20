@@ -26,17 +26,21 @@ export const receiveErrors = errors => ({
 
 export const fetchTodo = (id) => dispatch => {
   return TodoAPIUtil.fetchTodo(id)
-          .then((todo) => dispatch(receiveTodo(todo)));
+          .then((todo) => dispatch(receiveTodo(todo))
+          .then((err) => dispatch(receiveErrors(err.responseJSON))));
 };
 
 export const fetchTodos = () => dispatch => {
+  debugger;
   return TodoAPIUtil.fetchTodos()
-          .then((todos) => dispatch(receiveTodos(todos)));
+          .then((todos) => dispatch(receiveTodos(todos))
+          .then((err) => dispatch(receiveErrors(err.responseJSON))));
 };
 
 export const createTodo = (todo) => dispatch => {
   return TodoAPIUtil.createTodo(todo)
-          .then((todo1) => dispatch(receiveTodo(todo1)));
+          .then((todo1) => dispatch(receiveTodo(todo1))
+          .then((err) => dispatch(receiveErrors(err.responseJSON))));
 };
 
 export const deleteTodo = (todo) => dispatch => {

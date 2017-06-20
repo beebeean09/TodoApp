@@ -7,7 +7,8 @@ from '../../actions/todo_actions';
 const mapStateToProps = (state) => ({
   state: state,
   // Use selector to turn object of todos into an array
-  todos: allTodos(state)
+  todos: allTodos(state),
+  errors: state.errors
 });
 
 const mapDispatchToProps = dispatch => ({

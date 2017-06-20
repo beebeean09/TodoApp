@@ -10,7 +10,9 @@ class TodoList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchTodos();
+    if (this.props.todos) {
+      this.props.fetchTodos();      
+    }
   }
 
   render() {
